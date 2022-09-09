@@ -24,7 +24,7 @@ services:
     cst-ms-backend:
         image: 100lixo/cst-ms-backend:v1
         command: mvn clean spring-boot:run
-        build: ./Docker/java
+        build: ./docker/java
         working_dir: /cst-ms-backend
         restart: on-failure
         environment:
