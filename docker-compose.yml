@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+    cst-db-mysql:
+        image: 100lixo/cst-db-mysql:v1
+        container_name: cst-db-mysql
+        restart: on-failure
+        build:
+            context: ./docker/mysql
+            dockerfile: Dockerfile
+        environment:
+            TZ: America/Sao_Paulo
+            MYSQL_ROOT_PASSWORD: ColetaSeletiva@123
+            MYSQL_USER: 100lixo
+            MYSQL_PASSWORD: 100lixo@123
+            MYSQL_DATABASE: 100LIXO
+        volumes:
+            - ./database/100LIXO:var/lib/mysql
+        ports:
+            - '3322:3306'
+        expose:
+            - '3322'
+        networks:
+            - 100lixo
+    cst-ms-backend:
+        image: 100lixo/cst-ms-backend:v1
+        command: mvn clean spring-boot:run
+        build: ./Docker/java
+        working_dir: /cst-ms-backend
+        restart: on-failure
+        environment:
+            TZ: America/Sao_Paulo
+            SPRING_BOOT_ENVIRONMENT: Production
+        volumes:
+            - ./coletaseletiva:/cst-ms-backend
+            - ~/.m2:/root/.m2
+        ports:
+            - '9000-9099:80'
+        depends_on:
+            - cst-db-mysql
+        links:
+            - cst-db-mysql:cst-db-mysql
+        networks:
+            - 100lixo
+networks:
+    100lixo:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.238.0/24
