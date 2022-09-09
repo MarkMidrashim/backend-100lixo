@@ -6,4 +6,4 @@ ENV NON_BLOCKING_RANDOM "-Djava.security.egd=file:/dev/./urandom"
 ENV JAVA_OPTS "$MEMORY_OPTS $NON_BLOCKING_RANDOM"
 
 EXPOSE 80
-ENTRYPOINT ["sh", "-C", "java $JAVA_OPTS -jar /coletaseletiva/target/coletaseletiva-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /coletaseletiva/target/coletaseletiva-0.0.1-SNAPSHOT.jar"]

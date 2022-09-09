@@ -16,7 +16,10 @@ import br.com.fiap.coletaseletiva.data.model.Endereco;
 	"id",
 	"nome",
 	"cpfCnpj",
+	"email",
+	"senha",
 	"nascimento",
+	"ativo",
 	"endereco"
 })
 public class UsuarioVO extends RepresentationModel implements Serializable {
@@ -37,8 +40,11 @@ public class UsuarioVO extends RepresentationModel implements Serializable {
 	@JsonProperty("cpf_cnpj")
 	private String cpfCnpj;
 
+	private String email;
+	private String senha;
+	private String celular;
+	private boolean ativo;
 	private Date nascimento;
-
 	private Endereco endereco;
 
 	/* GETTERS & SETTERS */
@@ -67,6 +73,30 @@ public class UsuarioVO extends RepresentationModel implements Serializable {
 		this.cpfCnpj = cpfCnpj;
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return this.senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getCelular() {
+		return this.celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
 	public Date getNascimento() {
 		return nascimento;
 	}
@@ -81,6 +111,14 @@ public class UsuarioVO extends RepresentationModel implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public boolean getAtivo() {
+		return this.ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

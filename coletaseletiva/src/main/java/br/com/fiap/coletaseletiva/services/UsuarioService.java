@@ -50,6 +50,8 @@ public class UsuarioService implements UserDetailsService {
 		entity.setNome(usuarioVO.getNome());
 		entity.setCpfCnpj(usuarioVO.getCpfCnpj());
 		entity.setNascimento(usuarioVO.getNascimento());
+		entity.setEmail(usuarioVO.getEmail());
+		entity.setCelular(usuarioVO.getCelular());
 		entity.setEndereco(usuarioVO.getEndereco());
 
 		Usuario usuario = repository.save(entity);

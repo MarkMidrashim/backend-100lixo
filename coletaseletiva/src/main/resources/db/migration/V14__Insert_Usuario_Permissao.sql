@@ -1,0 +1,2 @@
+INSERT INTO usuario_permissao (ID_USUARIO, ID_PERMISSAO) 
+VALUES  (1, 1);

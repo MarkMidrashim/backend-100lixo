@@ -10,7 +10,7 @@ import br.com.fiap.coletaseletiva.data.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	@Query("SELECT u FROM User u WHERE u.userName =:userName")
-	Usuario findByUserName(@Param("userName") String userName);
+	@Query("SELECT u FROM usuario u WHERE u.DS_EMAIL =:username")
+	Usuario findByUserName(@Param("username") String username);
 
 }

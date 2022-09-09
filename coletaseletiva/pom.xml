@@ -135,8 +135,7 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<!-- &amp;useSSL=false -->
-					<url>jdbc:mysql://cst-db-mysql:3306/100LIXO?useTimezone=true&amp;serverTimezone=America/Sao_Paulo</url>
+					<url>jdbc:mysql://cst-db-mysql:3306/100LIXO?useTimezone=true&amp;serverTimezone=America/Sao_Paulo&amp;useSSL=false</url>
 					<user>100lixo</user>
 					<password>100lixo@123</password>
 				</configuration>
