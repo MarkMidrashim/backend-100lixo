@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.coletaseletiva.data.model.repository.UsuarioRepository;
+import br.com.fiap.coletaseletiva.services.UsuarioService;
 import br.com.fiap.coletaseletiva.security.AccountCredentialsVO;
 import br.com.fiap.coletaseletiva.security.jwt.JwtTokenProvider;
 
@@ -36,7 +36,7 @@ public class AuthController {
 	JwtTokenProvider tokenProvider;
 
 	@Autowired
-	UsuarioRepository repository;
+	UsuarioService service;
 
 	@ApiOperation(value="Authentication a user by credentials")
 	@PostMapping(value="/signin",
@@ -48,13 +48,13 @@ public class AuthController {
 			var password = data.getPassword();
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
-			var user = repository.findByUserName(username);
+			var user = service.loadUserByUsername(username);
 			var token = "";
 
 			if (user != null) {
 				token = tokenProvider.createToken(username, user.getRoles());
 			} else {
-				throw new UsernameNotFoundException("Username " + username + " not found");
+				throw new UsernameNotFoundException("Usuário " + username + " não encontrado");
 			}
 
 			Map<Object, Object> model = new HashMap<>();
@@ -62,7 +62,7 @@ public class AuthController {
 			model.put("token", token);
 			return ok(model);
 		} catch (AuthenticationException e) {
-			throw new BadCredentialsException("Invalid username or password supplied");
+			throw new BadCredentialsException("Usuário e/ou senha fornecidos são inválidos");
 		}
 	}
 }
