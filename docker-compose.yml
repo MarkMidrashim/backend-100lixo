@@ -25,13 +25,13 @@ services:
         image: 100lixo/cst-ms-backend:v1
         command: mvn clean spring-boot:run
         build: ./docker/java
-        working_dir: /cst-ms-backend
+        working_dir: /coletaseletiva
         restart: on-failure
         environment:
             TZ: America/Sao_Paulo
             SPRING_BOOT_ENVIRONMENT: Production
         volumes:
-            - ./coletaseletiva:/cst-ms-backend
+            - ./coletaseletiva:/coletaseletiva
             - ~/.m2:/root/.m2
         ports:
             - '9000-9099:80'
