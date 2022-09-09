@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.coletaseletiva.services.UsuarioService;
+import br.com.fiap.coletaseletiva.data.model.repository.UsuarioRepository;
 import br.com.fiap.coletaseletiva.security.AccountCredentialsVO;
 import br.com.fiap.coletaseletiva.security.jwt.JwtTokenProvider;
 
@@ -36,7 +36,7 @@ public class AuthController {
 	JwtTokenProvider tokenProvider;
 
 	@Autowired
-	UsuarioService service;
+	UsuarioRepository repository;
 
 	@ApiOperation(value="Authentication a user by credentials")
 	@PostMapping(value="/signin",
@@ -48,7 +48,7 @@ public class AuthController {
 			var password = data.getPassword();
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
-			var user = service.loadUserByUsername(username);
+			var user = repository.findByEmail(username);
 			var token = "";
 
 			if (user != null) {
