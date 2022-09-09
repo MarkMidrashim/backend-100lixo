@@ -12,17 +12,13 @@ class Main(object):
 	def __init__(self):
 		self.project_path = os.path.abspath(os.getcwd())
 		self.tag = "v1"
-		self.list_projects = [
-			"cst-db-mysql",
-			"cst-ms-backend"
-		]
 
-	def build_api(self, project: str):
+	def build_api(self):
 		"""
 		Metodo responsavel por realizar o build dos microservices
 		:param project:
 		"""
-		os.chdir("{}/API/{}".format(self.project_path, project))
+		os.chdir("{}/coletaseletiva/".format(self.project_path))
 		os.system("mvn clean package -DskipTests")
 		os.chdir(self.project_path)
 
@@ -32,8 +28,7 @@ class Main(object):
 		"""
 		try:
 			if "--compile" in sys.argv[2]:
-				for index, project in enumerate(list(filter(lambda i: "db" not in i or "amqp" not in i, self.list_projects))):
-					self.build_api(project)
+				self.build_api()
 		except IndexError as ie:
 			print("I'll not compile that")
 
